@@ -6,6 +6,7 @@ Strings:
 
 Array:
 2461. Maximum-sum-of-distinct-subarrays-with-length-k
+485. Maximum Consecutive Ones
 
 Need to do:
 217. Contains Duplicate
