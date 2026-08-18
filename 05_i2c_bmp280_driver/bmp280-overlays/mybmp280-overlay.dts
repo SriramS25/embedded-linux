@@ -1,0 +1,22 @@
+/dts-v1/;
+/plugin/;
+/{
+	fragment@0{
+		target-path = "/soc/i2c@7e804000";
+
+		__overlay__{
+			#address-cells = <1>;
+			#size-cells = <0>;
+			status = "okay";
+			
+			bmp280@77{
+				compatible = "bosch,bmp280";
+				reg = <0x77>;
+				status = "okay";
+			};
+		};
+	};
+
+};
+
+

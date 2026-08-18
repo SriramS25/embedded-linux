@@ -1,0 +1,58 @@
+// Everything your driver needs:
+
+// 1. Private data — stored per device
+struct bmp280_data {
+    struct i2c_client *client;  // link back to client
+    // calibration coefficients
+    u16 dig_T1;
+    s16 dig_T2;
+    s16 dig_T3;
+    // for char device
+    dev_t dev_num;
+    struct cdev cdev;
+    struct class *class;
+};
+
+// 2. probe() — called when device found
+static int bmp280_probe(struct i2c_client *client) {
+    // a. allocate private data
+    // b. verify chip ID
+    // c. read calibration
+    // d. configure sensor
+    // e. create /dev/mybmp280
+    // f. create sysfs
+    return 0;  // success
+}
+
+// 3. remove() — called when driver unloaded
+static void bmp280_remove(struct i2c_client *client) {
+    // cleanup everything probe() created
+}
+
+// 4. device tree match table
+static const struct of_device_id bmp280_of_match[] = {
+    { .compatible = "bosch,bmp280" },
+    { }
+};
+
+// 5. i2c id table (non-DT systems)
+static const struct i2c_device_id bmp280_id[] = {
+    { "bmp280", 0 },
+    { }
+};
+
+// 6. i2c_driver structure — ties everything together
+static struct i2c_driver bmp280_driver = {
+    .driver = {
+        .name = "mybmp280",
+        .of_match_table = bmp280_of_match,
+    },
+    .probe    = bmp280_probe,
+    .remove   = bmp280_remove,
+    .id_table = bmp280_id,
+};
+
+// 7. module init/exit — register driver
+module_i2c_driver(bmp280_driver);
+// This macro replaces module_init + module_exit
+// Registers driver with I2C subsystem

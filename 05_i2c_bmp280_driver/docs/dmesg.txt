@@ -1,0 +1,31 @@
+[12981.591264] mybmp280: loading out-of-tree module taints kernel.
+[12981.592714] mybmp280: module init
+[12981.593004] mybmp280 1-0077: ========== BMP280 probe() START ==========
+[12981.593097] mybmp280 1-0077: I2C address: 0x77
+[12981.593151] mybmp280 1-0077: I2C adapter: bcm2835 (i2c@7e804000)
+[12981.593212] mybmp280 1-0077: checking I2C adapter functionality
+[12981.593267] mybmp280 1-0077: I2C adapter supports required operations
+[12981.593318] mybmp280 1-0077: allocating private driver data
+[12981.593370] mybmp280 1-0077: private data allocated successfully
+[12981.593420] mybmp280 1-0077: client private data stored
+[12981.593452] mybmp280 1-0077: reading CHIP_ID register 0xD0
+[12981.594555] mybmp280 1-0077: CHIP_ID returned: 0x58
+[12981.594649] mybmp280 1-0077: BMP280 detected (CHIP_ID=0x58)
+[12981.594706] mybmp280 1-0077: performing soft reset
+[12981.595264] mybmp280 1-0077: soft reset command sent
+[12981.614200] mybmp280 1-0077: reset delay complete
+[12981.614244] mybmp280 1-0077: reading 24-byte calibration data from register 0x88
+[12981.618286] mybmp280 1-0077: calibration read successful: 24 bytes
+[12981.618333] mybmp280 1-0077: T calibration: T1=28179 T2=26318 T3=50
+[12981.618352] mybmp280 1-0077: P calibration: P1=37386 P2=-10772 P3=3024
+[12981.618377] mybmp280 1-0077: configuring normal measurement mode
+[12981.618919] mybmp280 1-0077: CTRL_MEAS configured: 0x27
+[12981.722161] mybmp280 1-0077: performing first temperature measurement
+[12981.722213] mybmp280 1-0077: reading temperature registers starting at 0xFA
+[12981.723223] mybmp280 1-0077: raw temperature bytes: 88 3F 00
+[12981.723274] mybmp280 1-0077: raw temperature ADC = 0x883F0 (558064)
+[12981.723301] mybmp280 1-0077: temperature compensation complete: 33.64 C
+[12981.723325] mybmp280 1-0077: temperature = 33.64 C
+[12981.723348] mybmp280 1-0077: ========== BMP280 probe() SUCCESS ==========
+[12981.723684] mybmp280: i2c_add_driver() returned 0
+[12981.723718] mybmp280: I2C driver registered successfully

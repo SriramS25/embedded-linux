@@ -1,0 +1,17 @@
+REGISTER    ADDRESS   VALUE YOU READ   MEANING
+──────────────────────────────────────────────────────
+chip_id     0xD0      0x58             "I am BMP280"
+status      0xF3      varies           measuring/idle
+ctrl_meas   0xF4      0x00→0x27        mode + oversampling
+config      0xF5      varies           standby, filter
+press_msb   0xF7      raw pressure     bits[19:12]
+press_lsb   0xF8      raw pressure     bits[11:4]
+press_xlsb  0xF9      raw pressure     bits[3:0]
+temp_msb    0xFA      0x87             bits[19:12]
+temp_lsb    0xFB      0xEB             bits[11:4]
+temp_xlsb   0xFC      0x00             bits[3:0]
+
+CALIBRATION REGISTERS (0x88-0x9F):
+calib00     0x88      0x13             dig_T1 LSB
+calib01     0x89      0x6E             dig_T1 MSB
+...24 bytes total of factory calibration data

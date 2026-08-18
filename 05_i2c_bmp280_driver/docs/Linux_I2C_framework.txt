@@ -1,0 +1,77 @@
+HARDWARE LAYER:
+────────────────
+BMP280 sensor
+    │
+    │ (SDA/SCL wires)
+    │
+Pi GPIO2/GPIO3
+    │
+    ▼
+I2C CONTROLLER (hardware inside Pi SoC)
+    │
+    ▼
+KERNEL I2C SUBSYSTEM:
+──────────────────────
+struct i2c_adapter    ← represents the I2C controller
+    │                    (i2c-1, i2c-2)
+    │
+    ▼
+struct i2c_client     ← represents ONE device on bus
+    │                    (your BMP280 at 0x77)
+    │
+    ▼
+struct i2c_driver     ← YOUR driver code
+    │                    (probe, remove, read, write)
+    │
+    ▼
+USERSPACE:
+──────────
+/dev/mybmp280         ← application reads temperature
+/sys/class/mybmp280/  ← sysfs entries
+
+
+
+
+
+Three Key Structures:
+1. struct i2c_adapter: 	// Represents the I2C BUS CONTROLLER
+			// You don't write this — kernel provides it
+			// i2c-1 = one adapter
+			// i2c-2 = another adapter
+	
+			// Think of it as:
+			// adapter = the road/highway
+			// devices travel on this road
+
+2. struct i2c_client:   // Represents ONE DEVICE on the bus
+			// Kernel creates this from device tree
+			// Contains:
+			struct i2c_client {
+			    unsigned short addr;      // 0x77 — device address
+			    char name[I2C_NAME_SIZE]; // "bmp280"
+			    struct i2c_adapter *adapter; // which bus it's on
+			    struct device dev;           // generic device
+			};
+
+			// Think of it as:
+			// client = a house on the road
+			// addr = house number (0x77)	
+
+3. struct i2c_driver:	// YOUR code — handles the device
+			// Contains function pointers kernel calls
+			struct i2c_driver {
+			    int (*probe)(struct i2c_client *);   // device found!
+			    void (*remove)(struct i2c_client *); // device removed
+			    struct i2c_device_id *id_table;      // what devices we handle
+			    struct of_match_table *of_match;     // device tree match
+			    struct device_driver driver;         // driver info
+			};
+
+			// Think of it as:
+			// driver = the postman who knows how to
+			// handle a specific house
+
+
+
+
+
