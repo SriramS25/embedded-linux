@@ -2,8 +2,9 @@
 #obj-m += 02_driver_with_args.o
 #obj-m += 03_major_num_static_alloc.o
 #obj-m += 04_major_num_dynamic_alloc.o
-obj-m += 05_dev_create.o
-
+#obj-m += 05_dev_create.o
+#obj-m += 06_dummy_driver.o
+obj-m +=  07_mychar_driver.o
 
 all:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
